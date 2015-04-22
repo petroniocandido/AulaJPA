@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.edu.ifnmg.TesteJPA.Presentation;
 
 import br.edu.ifnmg.TesteJPA.DataAccess.ClienteDAO;
@@ -23,29 +22,29 @@ import java.math.BigDecimal;
  */
 public class ExemploJPA {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-        ClienteRepositorio clientes = new ClienteDAO();
-        ProdutoRepositorio produtos = new ProdutoDAO();
-        VendaRepositorio vendas = new VendaDAO();
-        
-        Cliente c1 = new Cliente();
+    static ClienteRepositorio clientes = new ClienteDAO();
+    static ProdutoRepositorio produtos = new ProdutoDAO();
+    static VendaRepositorio vendas = new VendaDAO();
+
+    public static void criaBancoInicial() {
+            Cliente c1 = new Cliente();
         c1.setNome("Petrônio");
         c1.setCpf("920.489.366-72");
-        if(clientes.Salvar(c1)) {
+        if (clientes.Salvar(c1)) {
             System.out.println(c1 + " Salvo");
-        } else System.out.println(c1 + " Não Salvo!");
-        
+        } else {
+            System.out.println(c1 + " Não Salvo!");
+        }
+
         Cliente c2 = new Cliente();
         c2.setNome("José");
         c2.setCpf("111.111.111-11");
-        if(clientes.Salvar(c2)) {
+        if (clientes.Salvar(c2)) {
             System.out.println(c2 + " Salvo");
-        } else System.out.println(c2 + " Não Salvo!");
-        
+        } else {
+            System.out.println(c2 + " Não Salvo!");
+        }
+
         Produto p1 = new Produto("Escova de Dente", new BigDecimal("2.00"), 10);
         produtos.Salvar(p1);
         Produto p2 = new Produto("Ovos de galinha", new BigDecimal("6.00"), 10);
@@ -56,14 +55,25 @@ public class ExemploJPA {
         produtos.Salvar(p4);
         Produto p5 = new Produto("Feijão", new BigDecimal("2.00"), 10);
         produtos.Salvar(p5);
-        
+
         Venda v1 = new Venda(c1);
         v1.addItem(p1, 1);
         v1.addItem(p2, 1);
         v1.addItem(p3, 5);
-        
+
         vendas.Salvar(v1);
-                
     }
-    
+
+    public static void main(String[] args) {
+
+        Produto filtro = new Produto();
+        filtro.setPreco(null);
+        filtro.setNome("nha");
+
+        
+        for(Produto p : produtos.Buscar(filtro))
+            System.out.println(p.getId() + " - " + p.getNome() + " - " + p.getPreco());
+
+    }
+
 }

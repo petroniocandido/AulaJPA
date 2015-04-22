@@ -10,3 +10,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/build/
+/br.edu.ifnmg.TesteJPA.DomainModel/nbproject/private/
+/br.edu.ifnmg.TesteJPA.DataAccess/nbproject/private/
+/br.edu.ifnmg.TesteJPA.DomainModel/build/
+/br.edu.ifnmg.TesteJPA.DataAccess/build/
+/br.edu.ifnmg.TesteJPA.DomainModel/dist/
+/br.edu.ifnmg.TesteJPA.DataAccess/dist/
+/dist/

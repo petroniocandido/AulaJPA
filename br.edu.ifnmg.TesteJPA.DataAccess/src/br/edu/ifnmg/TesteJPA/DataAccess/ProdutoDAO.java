@@ -8,7 +8,9 @@ package br.edu.ifnmg.TesteJPA.DataAccess;
 
 import br.edu.ifnmg.TesteJPA.DomainModel.Produto;
 import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.ProdutoRepositorio;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 
 /**
@@ -23,8 +25,13 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
 
     @Override
     public List<Produto> Buscar(Produto filtro) {
-        Query consulta = manager.createQuery("select c from Produto c");
-        return consulta.getResultList();
+        
+        return  IgualA("id", filtro.getId())
+                .IgualA("preco", filtro.getPreco())
+                .Like("nome", filtro.getNome())
+                .OrderBy("nome", "Asc")
+                .Buscar();
+        
     }
     
 }

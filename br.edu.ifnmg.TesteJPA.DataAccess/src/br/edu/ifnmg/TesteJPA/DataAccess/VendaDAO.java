@@ -9,7 +9,6 @@ package br.edu.ifnmg.TesteJPA.DataAccess;
 import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.VendaRepositorio;
 import br.edu.ifnmg.TesteJPA.DomainModel.Venda;
 import java.util.List;
-import javax.persistence.Query;
 
 /**
  *
@@ -23,8 +22,12 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
 
     @Override
     public List<Venda> Buscar(Venda filtro) {
-        Query consulta = manager.createQuery("select c from Venda c");
-        return consulta.getResultList();
+        return IgualA("cliente", filtro.getCliente())
+                .IgualA("criacao", filtro.getCriacao())
+                .IgualA("id", filtro.getId())
+                .IgualA("valorTotal", filtro.getValorTotal())
+                .OrderBy("criacao", "DESC")
+                .Buscar();
     }
     
 }

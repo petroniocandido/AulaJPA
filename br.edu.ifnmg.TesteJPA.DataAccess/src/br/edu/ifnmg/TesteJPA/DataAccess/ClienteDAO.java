@@ -23,8 +23,11 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
 
     @Override
     public List<Cliente> Buscar(Cliente filtro) {
-        Query consulta = manager.createQuery("select c from Cliente c");
-        return consulta.getResultList();
+       return Like("nome", filtro.getNome())
+               .IgualA("id", filtro.getId())
+               .IgualA("cpf", filtro.getCpf())
+               .OrderBy("nome", "ASC")
+               .Buscar();
     }
 
     @Override
