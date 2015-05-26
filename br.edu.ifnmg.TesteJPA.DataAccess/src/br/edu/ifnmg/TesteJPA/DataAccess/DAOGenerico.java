@@ -10,9 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
@@ -21,7 +20,7 @@ import javax.persistence.Query;
  */
 public abstract class DAOGenerico<T> implements Repositorio<T> {
 
-    private EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("ExemploJPAPU");
+    @PersistenceContext(name = "ExemploJPAPU")
     protected EntityManager manager;
     private Class tipo;
     String where = "";
@@ -30,7 +29,6 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     Map<String,Object> parametros = new HashMap<>();
 
     public DAOGenerico(Class t) {
-        manager = fabrica.createEntityManager();
         this.tipo = t;
         jpql += t.getSimpleName() + " c";
     }
@@ -92,14 +90,12 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     @Override
     public boolean Salvar(T obj) {
-        EntityTransaction t = manager.getTransaction();
         try {
-            t.begin();
             manager.persist(obj);
-            t.commit();
+            manager.flush();
             return true;
         } catch(Exception e){
-            t.rollback();
+            
             return false;
         }
     }
@@ -111,14 +107,10 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     @Override
     public boolean Apagar(T obj) {
-        EntityTransaction t = manager.getTransaction();
         try {
-            t.begin();
             manager.remove(obj);
-            t.commit();
             return true;
         } catch(Exception e){
-            t.rollback();
             return false;
         }
     }
@@ -126,3 +118,4 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     public abstract List<T> Buscar(T filtro);
 
 }
+

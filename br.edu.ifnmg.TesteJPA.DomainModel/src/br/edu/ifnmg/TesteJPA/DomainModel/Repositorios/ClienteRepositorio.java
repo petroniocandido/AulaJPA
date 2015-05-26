@@ -7,12 +7,14 @@
 package br.edu.ifnmg.TesteJPA.DomainModel.Repositorios;
 
 import br.edu.ifnmg.TesteJPA.DomainModel.Cliente;
+import javax.ejb.Local;
 
 /**
  *
  * @author petronio
  */
 
+@Local
 public interface ClienteRepositorio extends Repositorio<Cliente> {
     public Cliente AbrirPorCPF(String cpf);
 }

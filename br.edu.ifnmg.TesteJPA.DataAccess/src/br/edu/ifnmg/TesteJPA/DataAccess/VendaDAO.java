@@ -9,11 +9,13 @@ package br.edu.ifnmg.TesteJPA.DataAccess;
 import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.VendaRepositorio;
 import br.edu.ifnmg.TesteJPA.DomainModel.Venda;
 import java.util.List;
+import javax.ejb.Singleton;
 
 /**
  *
  * @author petronio
  */
+@Singleton
 public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
 
     public VendaDAO() {

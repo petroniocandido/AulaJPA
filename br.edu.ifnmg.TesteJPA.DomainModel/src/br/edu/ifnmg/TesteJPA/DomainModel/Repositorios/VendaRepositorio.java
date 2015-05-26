@@ -7,11 +7,13 @@
 package br.edu.ifnmg.TesteJPA.DomainModel.Repositorios;
 
 import br.edu.ifnmg.TesteJPA.DomainModel.Venda;
+import javax.ejb.Local;
 
 /**
  *
  * @author petronio
  */
+@Local
 public interface VendaRepositorio extends Repositorio<Venda> {
     
 }

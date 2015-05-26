@@ -11,12 +11,14 @@ import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.ProdutoRepositorio;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.Singleton;
 import javax.persistence.Query;
 
 /**
  *
  * @author petronio
  */
+@Singleton
 public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositorio{
 
     public ProdutoDAO() {

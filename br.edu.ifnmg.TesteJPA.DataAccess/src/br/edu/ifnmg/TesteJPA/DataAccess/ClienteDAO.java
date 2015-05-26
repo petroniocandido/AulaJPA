@@ -9,12 +9,14 @@ package br.edu.ifnmg.TesteJPA.DataAccess;
 import br.edu.ifnmg.TesteJPA.DomainModel.Cliente;
 import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.ClienteRepositorio;
 import java.util.List;
+import javax.ejb.Singleton;
 import javax.persistence.Query;
 
 /**
  *
  * @author petronio
  */
+@Singleton
 public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositorio{
 
     public ClienteDAO() {

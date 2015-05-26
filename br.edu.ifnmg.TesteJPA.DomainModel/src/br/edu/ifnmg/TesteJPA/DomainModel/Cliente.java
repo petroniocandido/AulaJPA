@@ -31,6 +31,8 @@ public class Cliente implements Serializable {
     private String cpf;
 
     public Cliente() {
+        this.nome = "";
+        this.cpf = "";
     }
 
     public Cliente(String nome, String cpf) {
@@ -55,6 +57,8 @@ public class Cliente implements Serializable {
     }
 
     public String getCpf() {
+        if(cpf.length() < 11)
+            return "";
         return cpf.substring(0, 3).concat(".") +
                 cpf.substring(3,6).concat(".") +
                 cpf.substring(6,9).concat("-") +
