@@ -9,6 +9,7 @@ package br.edu.ifnmg.MeuPrimeiroJSF.Controllers;
 import br.edu.ifnmg.TesteJPA.DomainModel.Cliente;
 import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.ClienteRepositorio;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -26,9 +27,11 @@ public class ClienteController implements Serializable {
      */
     public ClienteController() {
         entidade = new Cliente();
+        filtro = new Cliente();
     }
     
     private Cliente entidade;
+    private Cliente filtro;
     
     @EJB
     private ClienteRepositorio dao;
@@ -40,6 +43,16 @@ public class ClienteController implements Serializable {
     public void setEntidade(Cliente entidade) {
         this.entidade = entidade;
     }
+
+    public Cliente getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(Cliente filtro) {
+        this.filtro = filtro;
+    }
+    
+    
     
     
     public void salvar() {
@@ -54,9 +67,17 @@ public class ClienteController implements Serializable {
         return "listagemClientes.xhtml";
     }
     
+     public String fitrar() {
+        return "listagemClientes.xhtml";
+    }
+    
     public String novo() {
         entidade = new Cliente();
         return "editarCliente.xhtml";
+    }
+    
+    public List<Cliente> getListagem() {
+        return dao.Buscar(entidade);
     }
     
 }

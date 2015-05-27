@@ -26,66 +26,86 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     String where = "";
     String orderby = "";
     String jpql = "select c from ";
-    Map<String,Object> parametros = new HashMap<>();
+    Map<String, Object> parametros = new HashMap<>();
 
     public DAOGenerico(Class t) {
         this.tipo = t;
         jpql += t.getSimpleName() + " c";
     }
-    
-    public DAOGenerico<T> OrderBy(String campo, String order){
-        
-        if(campo != null){
-            if(orderby.length() > 0)
-                    orderby += ",";
-        
+
+    public DAOGenerico<T> OrderBy(String campo, String order) {
+
+        if (campo != null) {
+            if (orderby.length() > 0) {
+                orderby += ",";
+            }
+
             orderby += "c." + campo + " " + order;
         }
-        
+
         return this;
     }
-    
-    public DAOGenerico<T> IgualA(String campo, Object valor){
-        
-        if(where.length() > 0)
-                    where += " and ";
-        
-        if(valor != null){
-                where = where + "c." + campo + " = :" + campo;
-                parametros.put(campo, valor);
-            }
-        
-        return this;
-    }
-    
-    public DAOGenerico<T> Like(String campo, String valor){
-        
-        if(where.length() > 0)
-                    where += " and ";
-        
-        if(valor != null){
-                where = where + "c." + campo +" like '%"+ valor +"%'";
-            }
-        
-        return this;
-    }
-    
-    public List<T> Buscar() {
-        if(where.length() > 0){
-            jpql = jpql + " where " + where;
+
+    public DAOGenerico<T> IgualA(String campo, Object valor) {
+
+        if (valor == null) {
+            return this;
         }
-        
-        if(orderby.length() > 0)
-            jpql = jpql + " order by " + orderby;
-        
-        Query consulta = manager.createQuery(jpql);
-        
-        for(String parametro : parametros.keySet())
-            consulta.setParameter(parametro, parametros.get(parametro));
-        
-        where = "";
-        
-        return consulta.getResultList();
+
+        if (where.length() > 0) {
+            where += " and ";
+        }
+
+        if (valor != null) {
+            where = where + "c." + campo + " = :" + campo;
+            parametros.put(campo, valor);
+        }
+
+        return this;
+    }
+
+    public DAOGenerico<T> Like(String campo, String valor) {
+
+        if (valor == null) {
+            return this;
+        }
+
+        if (where.length() > 0) {
+            where += " and ";
+        }
+
+        if (valor != null) {
+            where = where + "c." + campo + " like '%" + valor + "%'";
+        }
+
+        return this;
+    }
+
+    public List<T> Buscar() {
+        try {
+            if (where.length() > 0) {
+                jpql = jpql + " where " + where;
+            }
+
+            if (orderby.length() > 0) {
+                jpql = jpql + " order by " + orderby;
+            }
+
+            Query consulta = manager.createQuery(jpql);
+
+            for (String parametro : parametros.keySet()) {
+                consulta.setParameter(parametro, parametros.get(parametro));
+            }
+            return consulta.getResultList();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            where = "";
+            jpql = "select c from ";
+            orderby = "";
+            parametros = new HashMap<>();
+        }
+
     }
 
     @Override
@@ -94,15 +114,15 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
             manager.persist(obj);
             manager.flush();
             return true;
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
             return false;
         }
     }
 
     @Override
     public T Abrir(Long id) {
-        return (T)manager.find(tipo, id);
+        return (T) manager.find(tipo, id);
     }
 
     @Override
@@ -110,7 +130,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
         try {
             manager.remove(obj);
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -118,4 +138,3 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     public abstract List<T> Buscar(T filtro);
 
 }
-
