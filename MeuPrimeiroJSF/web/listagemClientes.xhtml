@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./Template.xhtml">
+
+            <ui:define name="content">
+                
+                <p:panelGrid columns="2">
+                    Nome:
+                    <p:inputText value="#{clienteController.filtro.nome}" />
+                    CPF:
+                    <p:inputText value="#{clienteController.filtro.cpf}" />
+                </p:panelGrid>
+                <p:commandButton value="Filtrar" action="#{clienteController.filtrar()}" />
+                <p:commandButton value="Novo" action="#{clienteController.novo()}" />
+                
+                <p:dataTable value="#{clienteController.listagem}" var="item">
+                    <p:column headerText="ID">
+                        #{item.id}
+                    </p:column>
+                    <p:column headerText="Nome">
+                        #{item.nome}
+                    </p:column>
+                    <p:column headerText="CPF">
+                        #{item.cpf}
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <p:commandButton value="Editar" />
+                    </p:column>
+                </p:dataTable> 
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
