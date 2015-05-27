@@ -67,7 +67,7 @@ public class ClienteController implements Serializable {
         return "listagemClientes.xhtml";
     }
     
-     public String fitrar() {
+     public String filtrar() {
         return "listagemClientes.xhtml";
     }
     

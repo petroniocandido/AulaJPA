@@ -16,8 +16,8 @@
                     CPF:
                     <p:inputText value="#{clienteController.filtro.cpf}" />
                 </p:panelGrid>
-                <p:commandButton value="Filtrar" action="#{clienteController.filtrar()}" />
-                <p:commandButton value="Novo" action="#{clienteController.novo()}" />
+                <p:commandButton value="Filtrar" ajax="false" action="#{clienteController.filtrar()}" />
+                <p:commandButton value="Novo" ajax="false" action="#{clienteController.novo()}" />
                 
                 <p:dataTable value="#{clienteController.listagem}" var="item">
                     <p:column headerText="ID">

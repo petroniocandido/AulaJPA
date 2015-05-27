@@ -48,7 +48,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     public DAOGenerico<T> IgualA(String campo, Object valor) {
 
-        if (valor == null) {
+        if (valor == null || valor.toString().isEmpty()) {
             return this;
         }
 
@@ -66,7 +66,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     public DAOGenerico<T> Like(String campo, String valor) {
 
-        if (valor == null) {
+        if (valor == null || valor.isEmpty()) {
             return this;
         }
 
