@@ -29,8 +29,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     Map<String, Object> parametros = new HashMap<>();
 
     public DAOGenerico(Class t) {
-        this.tipo = t;
-        jpql += t.getSimpleName() + " c";
+        this.tipo = t;        
     }
 
     public DAOGenerico<T> OrderBy(String campo, String order) {
@@ -83,6 +82,9 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     public List<T> Buscar() {
         try {
+            
+            jpql += tipo.getSimpleName() + " c";
+            
             if (where.length() > 0) {
                 jpql = jpql + " where " + where;
             }
@@ -98,6 +100,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
             }
             return consulta.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         } finally {
             where = "";
@@ -115,7 +118,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
             manager.flush();
             return true;
         } catch (Exception e) {
-
+            e.printStackTrace();
             return false;
         }
     }
@@ -131,6 +134,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
             manager.remove(obj);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
