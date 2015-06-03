@@ -59,8 +59,9 @@ public class ClienteController implements Serializable {
         dao.Salvar(entidade);
     }
     
-    public void apagar() {
+    public String apagar() {
         dao.Apagar(entidade);
+        return "listagemClientes.xhtml";
     }
     
     public String voltar() {
@@ -70,14 +71,24 @@ public class ClienteController implements Serializable {
      public String filtrar() {
         return "listagemClientes.xhtml";
     }
+     
+     public String limparfiltros() {
+         filtro = new Cliente();
+        return "listagemClientes.xhtml";
+    }
     
     public String novo() {
         entidade = new Cliente();
         return "editarCliente.xhtml";
     }
     
+    public String abrir(Cliente obj) {
+        entidade = obj;
+        return "editarCliente.xhtml";
+    }
+    
     public List<Cliente> getListagem() {
-        return dao.Buscar(entidade);
+        return dao.Buscar(filtro);
     }
     
 }
