@@ -6,33 +6,33 @@
 
 package br.edu.ifnmg.MeuPrimeiroJSF.Controllers;
 
-import br.edu.ifnmg.TesteJPA.DomainModel.Cliente;
-import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.ClienteRepositorio;
+import br.edu.ifnmg.TesteJPA.DomainModel.Produto;
+import br.edu.ifnmg.TesteJPA.DomainModel.Repositorios.ProdutoRepositorio;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 
 /**
  *
  * @author petronio
  */
-@Named(value = "clienteController")
+@Named(value = "produtoController")
 @SessionScoped
-public class ClienteController extends ControllerGenerico<Cliente> implements Serializable {
+public class ProdutoController extends ControllerGenerico<Produto> implements Serializable {
 
     /**
      * Creates a new instance of testeController
      */
-    public ClienteController() {
-        super("listagemClientes.xhtml","editarCliente.xhtml");
-        entidade = new Cliente();
-        filtro = new Cliente();
+    public ProdutoController() {
+        super("listagemProdutos.xhtml","editarProduto.xhtml");
+        entidade = new Produto();
+        filtro = new Produto();
     }
     
     @EJB
-    private ClienteRepositorio repositorio;
+    private ProdutoRepositorio repositorio;
 
     @PostConstruct
     public void configurar(){
