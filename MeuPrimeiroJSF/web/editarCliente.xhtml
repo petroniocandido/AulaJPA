@@ -11,10 +11,25 @@
             CPF:
             <p:inputText value="#{clienteController.entidade.cpf}" />
         </p:panelGrid>
-        <p:commandButton value="Salvar" action="#{clienteController.salvar()}" />
-        <p:commandButton value="Apagar" action="#{clienteController.apagar()}" />
-        <p:commandButton value="Voltar" action="#{clienteController.voltar()}" />
-        <p:commandButton value="Novo" action="#{clienteController.novo()}" />
+        <p:commandButton value="Salvar" onclick="msgSalvar.show();"  />
+        <p:commandButton value="Apagar"  onclick="msgApagar.show();"   />
+        <p:commandButton ajax="false" value="Voltar" action="#{clienteController.voltar()}" />
+        <p:commandButton ajax="false" value="Novo" action="#{clienteController.novo()}" />
+
+        <p:confirmDialog id="confirmaSalvar" message="Deseja realmente salvar as alterações?"  
+                         header="Confirmação" severity="alert" widgetVar="msgSalvar">  
+            
+            <p:commandButton ajax="false" value="SIM" action="#{clienteController.salvar()}" />  
+            <p:commandButton value="NÃO" onclick="msgSalvar.hide();" type="button" />   
+        </p:confirmDialog>  
+        
+        <p:confirmDialog id="confirmaApagar" message="Deseja realmente apagar o registro?"  
+                         header="Confirmação" severity="alert" widgetVar="msgApagar">  
+            
+            <p:commandButton ajax="false" value="SIM" action="#{clienteController.apagar()}" />  
+            <p:commandButton value="NÃO" onclick="msgApagar.hide();" type="button" />   
+        </p:confirmDialog>
+
     </ui:define>
 
 </ui:composition>

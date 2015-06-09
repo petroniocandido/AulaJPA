@@ -12,7 +12,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.print.attribute.standard.Severity;
 
 /**
  *
@@ -51,17 +54,41 @@ public class ClienteController implements Serializable {
     public void setFiltro(Cliente filtro) {
         this.filtro = filtro;
     }
+        
+    protected void MensagemSucesso(String titulo, String msg) {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, titulo);
+        context.addMessage(null, m);
+        context.getExternalContext().getFlash().setKeepMessages(true);        
+    }
     
-    
-    
+    protected void MensagemErro(String titulo, String msg) {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, titulo);
+        context.addMessage(null, m);
+        context.getExternalContext().getFlash().setKeepMessages(true);        
+    }
     
     public void salvar() {
-        dao.Salvar(entidade);
+        if(dao.Salvar(entidade)) {
+            MensagemSucesso("Sucesso!", "Registro salvo com sucesso!");
+        } else {
+            MensagemErro("Erro!", "Consulte o administrador do sistema!");
+        }
+        
     }
     
     public String apagar() {
-        dao.Apagar(entidade);
-        return "listagemClientes.xhtml";
+        if(dao.Apagar(entidade)) {
+            MensagemSucesso("Sucesso!", "Registro removido com sucesso!");
+            return "listagemClientes.xhtml";
+        } else {
+            MensagemErro("Erro!", "Consulte o administrador do sistema!");
+            return null;
+        }
+        
     }
     
     public String voltar() {
