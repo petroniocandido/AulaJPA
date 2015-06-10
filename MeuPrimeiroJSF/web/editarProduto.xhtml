@@ -8,16 +8,18 @@
     <ui:define name="content">
         <p:panel>
             <f:facet name="header">
-                Editar Cliente
+                Editar Produto
             </f:facet>
             <p:panelGrid columns="2">
                 Nome:
-                <p:inputText value="#{clienteController.entidade.nome}" />
-                CPF:
-                <p:inputText value="#{clienteController.entidade.cpf}" />
+                <p:inputText value="#{produtoController.entidade.nome}" />
+                Valor:
+                <p:inputText value="#{produtoController.entidade.preco}" />
+                Estoque:
+                <p:inputText value="#{produtoController.entidade.estoque}" />
             </p:panelGrid>
             <ui:include src="./componentes/botoesEditar.xhtml">
-                <ui:param name="controller" value="#{clienteController}" />
+                <ui:param name="controller" value="#{produtoController}" />
             </ui:include>
         </p:panel>
     </ui:define>

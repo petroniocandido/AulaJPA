@@ -12,30 +12,32 @@
             <ui:define name="content">
                 <p:panel>
                     <f:facet name="header">
-                        Buscar clientes
+                        Buscar produtos
                     </f:facet>
                     <p:panelGrid columns="2">
                         Nome:
-                        <p:inputText value="#{clienteController.filtro.nome}" />
-                        CPF:
-                        <p:inputText value="#{clienteController.filtro.cpf}" />
+                        <p:inputText value="#{produtoController.filtro.nome}" />
+                        
                     </p:panelGrid>
                     <ui:include src="./componentes/botoesListagem.xhtml">
-                        <ui:param name="controller" value="#{clienteController}" />
+                        <ui:param name="controller" value="#{produtoController}" />
                     </ui:include>
 
-                    <p:dataTable value="#{clienteController.listagem}" var="item">
+                    <p:dataTable value="#{produtoController.listagem}" var="item">
                         <p:column headerText="ID">
                             #{item.id}
                         </p:column>
                         <p:column headerText="Nome">
                             #{item.nome}
                         </p:column>
-                        <p:column headerText="CPF">
-                            #{item.cpf}
+                        <p:column headerText="Valor">
+                            #{item.preco}
+                        </p:column>
+                        <p:column headerText="Estoque">
+                            #{item.estoque}
                         </p:column>
                         <p:column headerText="Editar">
-                            <p:commandButton value="Editar" action="#{clienteController.abrir(item)}" />
+                            <p:commandButton value="Editar" action="#{produtoController.abrir(item)}" />
                         </p:column>
                     </p:dataTable> 
                 </p:panel>

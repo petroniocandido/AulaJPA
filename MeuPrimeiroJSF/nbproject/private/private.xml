@@ -3,7 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/petronio/dados/NetBeansProjects/AulaJPA/MeuPrimeiroJSF/web/listagemClientes.xhtml</file>
+            <file>file:/home/petronio/dados/NetBeansProjects/AulaJPA/MeuPrimeiroJSF/src/java/br/edu/ifnmg/MeuPrimeiroJSF/Controllers/ControllerGenerico.java</file>
+            <file>file:/home/petronio/dados/NetBeansProjects/AulaJPA/MeuPrimeiroJSF/src/java/br/edu/ifnmg/MeuPrimeiroJSF/Controllers/ProdutoController.java</file>
             <file>file:/home/petronio/dados/NetBeansProjects/AulaJPA/MeuPrimeiroJSF/src/java/br/edu/ifnmg/MeuPrimeiroJSF/Controllers/ClienteController.java</file>
         </group>
     </open-files>

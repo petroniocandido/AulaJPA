@@ -29,6 +29,7 @@ public class ProdutoController extends ControllerGenerico<Produto> implements Se
         super("listagemProdutos.xhtml","editarProduto.xhtml");
         entidade = new Produto();
         filtro = new Produto();
+        filtro.setPreco(null);
     }
     
     @EJB
